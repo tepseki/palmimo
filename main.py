@@ -10,7 +10,14 @@ import cv2
 import numpy as np
 from openai import OpenAI, OpenAIError
 
-from palmimo_sdk import FaceDisplay, HeadCamera, Palmimo, Speaker, SpeakerConfig
+from palmimo_sdk import (
+    FaceDisplay,
+    HeadCamera,
+    OpenAiEngine,
+    Palmimo,
+    Speaker,
+    SpeakerConfig,
+)
 
 DETECT_WIDTH = 480
 LOOP_INTERVAL_S = 0.1
@@ -114,7 +121,7 @@ def main() -> None:
     # No driver is attached, so no servo moves: face, voice and camera only.
     robot = Palmimo(
         display=FaceDisplay(),
-        speaker=Speaker(SpeakerConfig(lang="ja")),
+                speaker=Speaker(SpeakerConfig(lang="ja"), engine=OpenAiEngine(voice="coral")),
         camera=HeadCamera(),
     )
 
